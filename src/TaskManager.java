@@ -2,27 +2,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TaskManager {
-int id = 0;
+Integer id = 0;
 HashMap <Integer,Task> taskHashMap = new HashMap<>();//
 HashMap <Integer, SubTask> subTaskHashMap = new HashMap<>();
-HashMap <Integer, SubTask> subTaskHashMap = new HashMap<>();
-HashMap <EpicTask, HashMap<Integer,SubTask>> firstEpicTaskHashMap = new HashMap<>();
+HashMap <Integer, EpicTask> epicTaskHashMap = new HashMap<>();
+ArrayList<HashMap<Integer,SubTask>> subTaskArrayList = new ArrayList<>();
+HashMap <Integer, ArrayList<HashMap<Integer,SubTask>>> firstEpicTaskHashMap = new HashMap<>();
 // HashMap <Integer, HashMap<EpicTask, HashMap<Integer,SubTask>>> epicTaskHashMap = new HashMap<>();
-ArrayList<Task> tasks = new ArrayList<>();
 
-public void AddSubTaskToEpicTask(int idEpicTask, SubTask subTask){
-    
+
+public void AddSubTaskToEpicTask(EpicTask epicTask){
+    id++;
+    epicTaskHashMap.put(id, epicTask);
 }
 
-public void AddSubTask(int idSubTask,SubTask subTask){
+public void AddSubTask(Integer idEpicTask,SubTask subTask){
 
-for (EpicTask epicTask : firstEpicTaskHashMap.keySet()){
-    if(epicTask.getTaskID() == idSubTask){
-        id++;
-        subTaskHashMap.put(id, subTask);
-        firstEpicTaskHashMap.put(epicTask)
-    }
+if(epicTaskHashMap.containsKey(idEpicTask)){
+    id++;
+    subTaskHashMap.put(id,subTask);
+    subTaskArrayList.add(subTaskHashMap);
+    firstEpicTaskHashMap.put(idEpicTask,subTaskArrayList);
 }
+
 }
 public void AddTask(Task task){
     id++;
